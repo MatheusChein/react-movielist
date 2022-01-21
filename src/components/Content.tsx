@@ -6,28 +6,10 @@ import { SelectedGenreContext } from "../contexts/SelectedGenreContext";
 
 import '../styles/content.scss';
 
-interface MovieProps {
-  imdbID: string;
-  Title: string;
-  Poster: string;
-  Ratings: Array<{
-    Source: string;
-    Value: string;
-  }>;
-  Runtime: string;
-}
-
 export function Content() {
   // Complete aqui
-  const { selectedGenre } = useContext(SelectedGenreContext)
+  const { selectedGenre, movies } = useContext(SelectedGenreContext)
 
-  const [movies, setMovies] = useState<MovieProps[]>([]);
-
-  useEffect(() => {
-    api.get<MovieProps[]>(`movies/?Genre_id=${selectedGenre.id}`).then(response => {
-      setMovies(response.data);
-    });
-  }, [selectedGenre.id]);
   
   return (
     <div className="container">
